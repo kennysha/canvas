@@ -7,7 +7,7 @@
 <!-- You can add your style here rather than in an external style sheet. -->
 <style>
 	canvas {
-	    border:5px solid #d3d3d3;
+	    border: 5px solid #d3d3d3;
 	    background-color: #f1f1f1;
 	    display: block;
 	}
@@ -15,7 +15,36 @@
 </head>
 <body>
     <!-- DO NOT MODIFY THIS HTML -->
-    <canvas id = "myCanvas" width = "350" height = "500"  ></canvas>
+    <canvas id = "myCanvas" width = 500 height = 500></canvas>
     <input type = "color" id = "picker"/>
 </body>
 </html>
+
+<script>
+    var canvas = document.getElementById("myCanvas");
+    canvas.width = window.innerWidth * .8;
+    canvas.height = window.innerWidth * .8;
+    var ctx = canvas.getContext("2d");
+    var color = "red";
+    ctx.fillStyle = color;
+
+    function draw(posX, posY) {
+        console.log("You are drawing now");
+        ctx.arc(posX, posY, 10, 0, 2 * Math.PI);
+        ctx.fill();
+    }
+
+    window.addEventListener('mousemove', function (e) {
+        console.log(e.x);
+        console.log(e.y);
+        draw(e.x, e.y);
+    })
+
+    window.addEventListener('keypress', function (e) {
+        console.log(e);
+
+    })
+
+
+
+</script>
