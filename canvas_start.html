@@ -17,34 +17,72 @@
     <!-- DO NOT MODIFY THIS HTML -->
     <canvas id = "myCanvas" width = 500 height = 500></canvas>
     <input type = "color" id = "picker"/>
+
+    <script>var canvas = document.getElementById("myCanvas");
+        canvas.width = window.innerWidth * .8;
+        canvas.height = window.innerWidth * .8;
+        var ctx = canvas.getContext("2d");
+        var color = "red";
+        ctx.fillStyle = color;
+        var canIDraw = true;
+
+        function draw(posX, posY) {
+            if (canIDraw) {
+                ctx.fillStyle = color;
+                ctx.beginPath();
+                ctx.arc(posX, posY, 10, 0, 2 * Math.PI);
+                ctx.fill();
+            }
+        }
+
+        window.addEventListener('mousemove', function (e) {
+                draw(e.x, e.y);
+        })
+
+        window.addEventListener('keydown', function (e) {
+            if (e.keyCode == 71) {
+                console.log("green");
+                color = "green";
+                draw(e.x, e.y);
+            }
+            else if (e.keyCode == 66) {
+                console.log("blue");
+                color = "blue";
+            }
+            else if (e.keyCode == 82) {
+                console.log("red");
+                color = "red";
+            }
+            else if (e.keyCode == 89) {
+                console.log("yellow");
+                color = "yellow";
+            }
+            else if (e.keyCode == 32) {
+                console.log(e.keyCode);
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+            }
+            else if (e.keyCode == 38) {
+                console.log(e.keyCode);
+                canIDraw = false;
+
+            }
+            else if (e.keyCode == 40) {
+                console.log(e.keyCode);
+                canIDraw = true;
+            }
+        })
+
+        document.getElementById("picker").addEventListener("change", function (e) {
+            var colorPicked = e.currentTarget.value;
+            console.log(colorPicked);
+            color = colorPicked;
+
+        });
+    </script>
 </body>
+
+
+
 </html>
 
-<script>
-    var canvas = document.getElementById("myCanvas");
-    canvas.width = window.innerWidth * .8;
-    canvas.height = window.innerWidth * .8;
-    var ctx = canvas.getContext("2d");
-    var color = "red";
-    ctx.fillStyle = color;
 
-    function draw(posX, posY) {
-        console.log("You are drawing now");
-        ctx.arc(posX, posY, 10, 0, 2 * Math.PI);
-        ctx.fill();
-    }
-
-    window.addEventListener('mousemove', function (e) {
-        console.log(e.x);
-        console.log(e.y);
-        draw(e.x, e.y);
-    })
-
-    window.addEventListener('keypress', function (e) {
-        console.log(e);
-
-    })
-
-
-
-</script>
